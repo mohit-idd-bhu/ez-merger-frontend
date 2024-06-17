@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Overlay from '../../UI/Overlay';
 import Card from '../../UI/Card';
 import { useNavigate } from 'react-router-dom';
+import styles from './Login.module.css';
 
 function Login(props) {
     const [email,setEmail] = useState('');
@@ -12,6 +13,10 @@ function Login(props) {
 
     const formSubmitHandler = async (e)=>{
         e.preventDefault();
+        if(email.length===0||password.length===0){
+            alert("Email or Password Missing");
+            return;
+        }
         setLoading(true);
         try{
             const res = await axios.post('http://localhost:5000/auth/login',{
@@ -36,22 +41,24 @@ function Login(props) {
         <>
         {loading&&<Overlay/>}
         <Card>
-            <form onSubmit={formSubmitHandler}>
-                <h2>Login Form</h2>
+            <form onSubmit={formSubmitHandler} className={styles['form']}>
+                <h2 className={styles['header']}>Login Form</h2>
 
-                <label>Email</label>
+                <label className={styles['label']}>Email</label>
                 <input 
+                className={styles['input']}
                 type='email'
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}/>
 
-                <label>Password</label>
+                <label className={styles['label']}>Password</label>
                 <input 
+                className={styles['input']}
                 type='password'
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}/>
 
-                <button type='submit'>Log Up</button>
+                <button type='submit' className={styles['button']}>Log In</button>
             </form>
         </Card>
         </>

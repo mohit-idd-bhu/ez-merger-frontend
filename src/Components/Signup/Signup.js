@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Overlay from '../../UI/Overlay';
 import Card from '../../UI/Card';
+import styles from './Signup.module.css';
 
 function Signup(props) {
     const [email,setEmail] = useState('');
@@ -11,8 +12,12 @@ function Signup(props) {
     const navigate = useNavigate();
 
     const formSubmitHandler = async (e)=>{
-        setLoading(true);
         e.preventDefault();
+        if(email.length===0||password.length===0){
+            alert("Email or Password Missing");
+            return;
+        }
+        setLoading(true);
         try{
             await axios.post('http://localhost:5000/auth/signup',{
                 email:email,
@@ -38,22 +43,24 @@ function Signup(props) {
         <>
         {loading&&<Overlay/>}
         <Card>
-            <form onSubmit={formSubmitHandler}>
-                <h2>Signup</h2>
+            <form onSubmit={formSubmitHandler} className={styles['form']}>
+                <h2 className={styles['heading']}>Signup</h2>
 
-                <label>Email</label>
+                <label className={styles['label']}>Email</label>
                 <input 
+                className={styles['input']}
                 type='email'
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}/>
 
-                <label>Password</label>
+                <label className={styles['label']}>Password</label>
                 <input 
+                className={styles['input']}
                 type='password'
                 value={password}
                 onChange={(e)=>setPassword(e.target.value)}/>
 
-                <button type='submit'>Sign Up</button>
+                <button type='submit' className={styles['button']}>Sign Up</button>
             </form>
         </Card>
         </>

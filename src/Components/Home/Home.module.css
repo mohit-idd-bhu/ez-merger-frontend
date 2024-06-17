@@ -1,0 +1,24 @@
+.list-link,
+.list-link:hover,
+.list-link:visited,
+.list-link:active{
+    color: black;
+    text-decoration: none;
+}
+
+.ul-list{
+    list-style: none;
+}
+
+.heading{
+    margin: auto;
+}
+
+.delete-button{
+    background-color:gray;
+}
+
+.delete-button:hover{
+    background-color: darkgray;
+}
+
