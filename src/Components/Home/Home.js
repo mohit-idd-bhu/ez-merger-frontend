@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Card from '../../UI/Card';
+import Card from '../../UI/Card/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../UI/Button/Button'
 import styles from './Home.module.css';
@@ -52,15 +52,15 @@ function Home() {
             {documentData.map(document=>
                 <li key={document.id} className={styles['list-item']}>
                     <Link to={`edit/${document.id}`} className={styles['list-link']}>
-                    <Card className={styles['documents']}>
-                        <h2>{document.title}</h2>
-                        <h5>Owner : {document.owner}</h5>
-                        <p>{document.content.substring(0,50)}...<b>Read More</b></p>
-                        <Button 
-                        className={styles['delete-button']} 
-                        onClick={(e)=> handleDelete(e,document)}>
-                            Delete</Button>
-                    </Card>
+                        <Card className={styles['documents']}>
+                            <h2>{document.title}</h2>
+                            <h5>Owner : {document.owner}</h5>
+                            <p>{document.content.substring(0,50)}...<b>Read More</b></p>
+                            <Button 
+                            className={styles['delete-button']} 
+                            onClick={(e)=> handleDelete(e,document)}>
+                                Delete</Button>
+                        </Card>
                     </Link>
                 </li>
             )}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Overlay from '../../UI/Overlay';
-import Card from '../../UI/Card';
+import Card from '../../UI/Card/Card';
 import styles from './Signup.module.css';
 
 function Signup(props) {

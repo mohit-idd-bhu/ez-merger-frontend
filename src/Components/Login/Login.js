@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import Overlay from '../../UI/Overlay';
-import Card from '../../UI/Card';
+import Card from '../../UI/Card/Card';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 

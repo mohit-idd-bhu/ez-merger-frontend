@@ -7,7 +7,10 @@
 }
 
 .ul-list{
+    padding: 0px;
     list-style: none;
+    width: 70%;
+    margin: auto;
 }
 
 .heading{
@@ -20,5 +23,12 @@
 
 .delete-button:hover{
     background-color: darkgray;
+}
+
+.documents{
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
 }
 

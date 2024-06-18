@@ -1,0 +1,16 @@
+.collaborator-form{
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+.input {
+    padding: 0.5rem;
+    margin: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.collaborator-button{
+    padding: 0.75rem;
+}

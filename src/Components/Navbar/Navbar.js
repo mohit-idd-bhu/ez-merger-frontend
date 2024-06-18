@@ -17,7 +17,7 @@ const Navbar = ({isLoggedIn,onLogout}) => {
             const token = localStorage.getItem('jwt-token');
             const response = await axios.post(
                 'http://localhost:5000/docs/create',
-                {title:"Random Title"},
+                {title:`New Document ${new Date().toLocaleString()}`},
                 {headers:{Authorization:token}}
             );
             navigate(`edit/${response.data.id}`);
