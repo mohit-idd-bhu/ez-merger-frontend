@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Overlay from '../../UI/Overlay';
 import Card from '../../UI/Card/Card';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 
 function Login(props) {
@@ -10,6 +10,7 @@ function Login(props) {
     const [password,setPassword] = useState('');
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const formSubmitHandler = async (e)=>{
         e.preventDefault();
@@ -25,7 +26,7 @@ function Login(props) {
             });
             const jwt_token=res.data.auth_token;
             props.onLogin(jwt_token);
-            navigate('/');
+            navigate(location.pathname);
             return;
         }
         catch(err){
