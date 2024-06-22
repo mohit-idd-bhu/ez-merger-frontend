@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import axios from 'axios';
 import Button from '../../UI/Button/Button'
+import { backendUrl } from '../../config';
 
 const Navbar = ({isLoggedIn,onLogout}) => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Navbar = ({isLoggedIn,onLogout}) => {
         try{
             const token = localStorage.getItem('jwt-token');
             const response = await axios.post(
-                'http://localhost:5000/docs/create',
+                `${backendUrl}/docs/create`,
                 {title:`New Document ${new Date().toLocaleString()}`},
                 {headers:{Authorization:token}}
             );

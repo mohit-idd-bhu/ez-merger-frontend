@@ -1,18 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Card from '../../UI/Card/Card';
-import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../UI/Button/Button'
+import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
+import Document from '../Document/Document';
+import { backendUrl } from '../../config';
 
 function Home() {
     const [documentData,setDocumentData] = useState([]);
     const jwt_token = localStorage.getItem('jwt-token');
-    const navigate = useNavigate();
 
     const getData = async (token)=>{
         try{
-            const response = await axios.get('http://localhost:5000/docs/',{
+            const response = await axios.get(`${backendUrl}/docs/`,{
                 headers:{
                     Authorization:token
                 }
@@ -24,6 +23,7 @@ function Home() {
         catch(err){
             console.log(err);
             localStorage.removeItem('jwt-token');
+            window.location.pathname='/login';
         }
     }
 
@@ -34,15 +34,13 @@ function Home() {
     const handleDelete = async (e,document)=>{
         e.preventDefault();
         try{
-            await axios.delete(`http://localhost:5000/docs/delete/${document.id}`,
+            await axios.delete(`${backendUrl}/docs/delete/${document.id}`,
                 {headers:{Authorization:jwt_token}}
             );
             await getData(jwt_token);
         }
         catch(err){
             console.log(err);
-            localStorage.removeItem('jwt-token');
-            navigate('/login');
         }
     }
 
@@ -52,15 +50,7 @@ function Home() {
             {documentData.map(document=>
                 <li key={document.id} className={styles['list-item']}>
                     <Link to={`edit/${document.id}`} className={styles['list-link']}>
-                        <Card className={styles['documents']}>
-                            <h2>{document.title}</h2>
-                            <h5>Owner : {document.owner}</h5>
-                            <p>{document.content.substring(0,50)}...<b>Read More</b></p>
-                            <Button 
-                            className={styles['delete-button']} 
-                            onClick={(e)=> handleDelete(e,document)}>
-                                Delete</Button>
-                        </Card>
+                        <Document document={document} onHandleDelete={handleDelete}/>
                     </Link>
                 </li>
             )}

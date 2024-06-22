@@ -4,6 +4,7 @@ import axios from 'axios';
 import Overlay from '../../UI/Overlay';
 import Card from '../../UI/Card/Card';
 import styles from './Signup.module.css';
+import { backendUrl } from '../../config';
 
 function Signup(props) {
     const [email,setEmail] = useState('');
@@ -19,11 +20,12 @@ function Signup(props) {
         }
         setLoading(true);
         try{
-            await axios.post('http://localhost:5000/auth/signup',{
+            await axios.post(`${backendUrl}/auth/signup`,{
                 email:email,
                 password:password
             });
             navigate('/login');
+            return;
         }
         catch(err){
             if(err.response){

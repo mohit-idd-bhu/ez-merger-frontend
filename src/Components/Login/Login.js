@@ -2,15 +2,15 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import Overlay from '../../UI/Overlay';
 import Card from '../../UI/Card/Card';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
+import { backendUrl } from '../../config';
 
 function Login(props) {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
 
     const formSubmitHandler = async (e)=>{
         e.preventDefault();
@@ -20,13 +20,13 @@ function Login(props) {
         }
         setLoading(true);
         try{
-            const res = await axios.post('http://localhost:5000/auth/login',{
+            const res = await axios.post(`${backendUrl}/auth/login`,{
                 email:email,
                 password:password
             });
             const jwt_token=res.data.auth_token;
             props.onLogin(jwt_token);
-            navigate(location.pathname);
+            navigate('/');
             return;
         }
         catch(err){
